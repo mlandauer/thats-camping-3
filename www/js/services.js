@@ -56,15 +56,18 @@ angular.module('starter.services', [])
 })
 
 .factory('geolocation', ['$q', function($q) {
+  var cachedPosition = null;
+
   return {
-    getLocation: function() {
-      return {lat: 1.0, lng: 2.0};
+    getPosition: function() {
+      return cachedPosition;
     },
-    updateLocation: function() {
+    updatePosition: function() {
       var deferred = $q.defer();
       // TODO implement reject
       navigator.geolocation.getCurrentPosition(function(position) {
-        deferred.resolve({lat: position.coords.latitude, lng: position.coords.longitude});
+        cachedPosition = {lat: position.coords.latitude, lng: position.coords.longitude}
+        deferred.resolve(cachedPosition);
       });
       return deferred.promise;
     }

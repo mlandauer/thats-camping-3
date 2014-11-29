@@ -5,9 +5,9 @@ angular.module('starter.controllers', [])
 
 .controller('CampsitesCtrl', function($scope, Campsites, geolocation) {
   $scope.campsites = Campsites.all();
-  $scope.position = geolocation.getLocation();
+  $scope.position = geolocation.getPosition();
   $scope.locateMe = function() {
-    geolocation.updateLocation().then(function(position) {
+    geolocation.updatePosition().then(function(position) {
       $scope.position = position;
     });
   };
