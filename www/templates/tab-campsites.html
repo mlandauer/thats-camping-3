@@ -1,0 +1,9 @@
+<ion-view title="Campsites">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="campsite in campsites" type="item-text-wrap" href="#/tab/campsite/{{campsite.id}}">
+        {{campsite.shortName}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
