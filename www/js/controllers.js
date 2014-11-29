@@ -3,14 +3,12 @@ angular.module('starter.controllers', [])
 .controller('DashCtrl', function($scope) {
 })
 
-.controller('CampsitesCtrl', function($scope, Campsites) {
+.controller('CampsitesCtrl', function($scope, Campsites, geolocation) {
   $scope.campsites = Campsites.all();
-  $scope.position = null;
-  $scope.locateMe = function(){
-    navigator.geolocation.getCurrentPosition(function(position) {
-      $scope.$apply(function() {
-        $scope.position = {lat: position.coords.latitude, lng: position.coords.longitude};
-      });
+  $scope.position = geolocation.getLocation();
+  $scope.locateMe = function() {
+    geolocation.updateLocation().then(function(position) {
+      $scope.position = position;
     });
   };
 })
