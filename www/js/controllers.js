@@ -5,6 +5,14 @@ angular.module('starter.controllers', [])
 
 .controller('CampsitesCtrl', function($scope, Campsites) {
   $scope.campsites = Campsites.all();
+  $scope.position = null;
+  $scope.locateMe = function(){
+    navigator.geolocation.getCurrentPosition(function(position) {
+      $scope.$apply(function() {
+        $scope.position = {lat: position.coords.latitude, lng: position.coords.longitude};
+      });
+    });
+  };
 })
 
 .controller('CampsiteDetailCtrl', function($scope, $stateParams, Campsites) {
