@@ -7,7 +7,9 @@ angular.module('starter.controllers', [])
   $scope.campsites = Campsites.all();
   $scope.position = geolocation.getPosition();
   $scope.locateMe = function() {
+    $scope.updatingPosition = true;
     geolocation.updatePosition().then(function(position) {
+      $scope.updatingPosition = false;
       $scope.position = position;
     });
   };
