@@ -4,7 +4,6 @@
     </button>
   </ion-nav-buttons>
   <ion-content>
-    <p>Latitude: {{position.lat}}, Longitude: {{position.lng}}</p>
     <ion-list>
       <ion-item ng-repeat="campsite in campsites" type="item-text-wrap" href="#/tab/campsite/{{campsite.id}}">
         <p>{{campsite.position | distanceInMetres:position | distanceText}}</p>
