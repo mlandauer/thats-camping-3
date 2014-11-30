@@ -57,6 +57,36 @@ angular.module('starter.controllers', [])
   };
 })
 
+.filter('bearingInDegrees', function() {
+  return function(position1, position2) {
+    if (position2 == null)
+      return null;
+
+    var lon2 = position2.lng.toRad();
+    var lat2 = position2.lat.toRad();
+    var lon1 = position1.lng.toRad();
+    var lat1 = position1.lat.toRad();
+    var dLon = lon1 - lon2;
+    var y = Math.sin(dLon) * Math.cos(lat1);
+    var x = Math.cos(lat2) * Math.sin(lat1) - Math.sin(lat2) * Math.cos(lat1) * Math.cos(dLon);
+    // This is a number between 0 and 360
+    var bearing = (Math.atan2(y, x).toDeg() + 360.0) % 360;
+    return bearing;
+  };
+})
+
+.filter('bearingText', function() {
+  return function(bearing) {
+    if (bearing == null) {
+      return ""
+    }
+    // Dividing the compass into 8 sectors that are centred on north
+    sector = Math.floor(((bearing + 22.5) % 360.0) / 45.0);
+    sectorNames = [ "N", "NE", "E", "SE", "S", "SW", "W", "NW" ];
+    return sectorNames[sector];
+  };
+})
+
 .controller('CampsiteDetailCtrl', function($scope, $stateParams, Campsites) {
   $scope.campsite = Campsites.get($stateParams.campsiteId);
 })

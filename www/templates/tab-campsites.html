@@ -9,6 +9,7 @@
         {{campsite.shortName}}
         <span class="item-note">
           {{campsite.position | distanceInMetres:position | distanceText}}
+          {{campsite.position | bearingInDegrees:position | bearingText}}
         </span>
       </ion-item>
     </ion-list>
