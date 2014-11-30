@@ -7,7 +7,8 @@
     <p>Latitude: {{position.lat}}, Longitude: {{position.lng}}</p>
     <ion-list>
       <ion-item ng-repeat="campsite in campsites" type="item-text-wrap" href="#/tab/campsite/{{campsite.id}}">
-        {{campsite.shortName}}
+        <p>{{campsite.position | distanceInMetres:position | distanceText}}</p>
+        <p>{{campsite.shortName}}</p>
       </ion-item>
     </ion-list>
   </ion-content>
