@@ -26,6 +26,15 @@ angular.module('starter.controllers', [])
   };
 })
 
+.filter('orderByDistanceTo', function($filter) {
+  return function(campsites, position) {
+    distance = function(campsite) {
+      return $filter('distanceInMetres')(campsite.position, position);
+    };
+    return $filter('orderBy')(campsites, distance, false);
+  };
+})
+
 .filter('distanceInMetres', function() {
   return function(position1, position2) {
     if (position1 == null || position2 == null)
