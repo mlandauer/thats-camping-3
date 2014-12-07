@@ -13,7 +13,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('CampsitesCtrl', function($scope, Campsites, geolocation) {
-  Campsites.all().success(function(data, status, headers, config) {
+  Campsites.all().then(function(data) {
     $scope.campsites = data;
   })
   $scope.position = geolocation.getPosition();

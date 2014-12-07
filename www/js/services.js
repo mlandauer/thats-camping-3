@@ -10,7 +10,11 @@ angular.module('starter.services', [])
 
   return {
     all: function() {
-      return campsites;
+      var deferred = $q.defer();
+      campsites.success(function(data, status, headers, config) {
+        deferred.resolve(data);
+      });
+      return deferred.promise;
     },
     get: function(campsiteId) {
       // Simple index lookup
