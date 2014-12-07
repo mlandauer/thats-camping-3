@@ -8,7 +8,14 @@ angular.module('starter.services', [])
 
   var deferred = $q.defer();
   $http.get('/data.json').success(function(data, status, headers, config) {
-    deferred.resolve(data);
+    var campsites = data["campsites"];
+    // Latitude and longitude is stored differently in data.json
+    campsites.forEach(function(campsite){
+      campsite.position = {lat: campsite.latitude, lng: campsite.longitude};
+      campsite.latitude = null;
+      campsite.longitude = null;
+    });
+    deferred.resolve(campsites);
   });
   var campsites = deferred.promise;
 
