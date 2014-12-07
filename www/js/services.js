@@ -6,23 +6,21 @@ angular.module('starter.services', [])
 .factory('Campsites', ['$http', '$q', function($http, $q) {
   // Might use a resource here that returns a JSON array
 
-  var campsites = $http.get('/data.json');
+  var deferred = $q.defer();
+  $http.get('/data.json').success(function(data, status, headers, config) {
+    deferred.resolve(data);
+  });
+  var campsites = deferred.promise;
 
   return {
     all: function() {
-      var deferred = $q.defer();
-      campsites.success(function(data, status, headers, config) {
-        deferred.resolve(data);
-      });
-      return deferred.promise;
+      return campsites;
     },
     get: function(campsiteId) {
-      // Simple index lookup
-      var deferred = $q.defer();
-      campsites.success(function(data, status, headers, config) {
-        deferred.resolve(data[campsiteId]);
+      return campsites.then(function(data) {
+        // Simple index lookup
+        return data[campsiteId]
       });
-      return deferred.promise;
     }
   }
 }])
