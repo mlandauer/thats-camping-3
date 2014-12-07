@@ -7,7 +7,7 @@ angular.module('starter.services', [])
   // Might use a resource here that returns a JSON array
 
   var deferred = $q.defer();
-  $http.get('/data.json').success(function(data, status, headers, config) {
+  $http.get('data.json').success(function(data, status, headers, config) {
     var campsites = data["campsites"];
     // Latitude and longitude is stored differently in data.json
     campsites.forEach(function(campsite){
