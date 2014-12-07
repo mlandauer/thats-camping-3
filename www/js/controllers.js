@@ -13,7 +13,9 @@ angular.module('starter.controllers', [])
 })
 
 .controller('CampsitesCtrl', function($scope, Campsites, geolocation) {
-  $scope.campsites = Campsites.all();
+  Campsites.all().success(function(data, status, headers, config) {
+    $scope.campsites = data;
+  })
   $scope.position = geolocation.getPosition();
   $scope.locateMe = function() {
     $scope.updatingPosition = true;
@@ -88,7 +90,9 @@ angular.module('starter.controllers', [])
 })
 
 .controller('CampsiteDetailCtrl', function($scope, $stateParams, Campsites) {
-  $scope.campsite = Campsites.get($stateParams.campsiteId);
+  Campsites.get($stateParams.campsiteId).then(function(data) {
+    $scope.campsite = data;
+  });
 })
 
 .controller('AccountCtrl', function($scope) {
