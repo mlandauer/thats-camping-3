@@ -3,7 +3,7 @@ angular.module('starter.services', [])
 /**
  * A simple example service that returns some data.
  */
-.factory('Campsites', ['$http', '$q', function($http, $q) {
+.factory('Campsites', ['$http', '$q', '$filter', function($http, $q, $filter) {
   // Might use a resource here that returns a JSON array
 
   var deferred = $q.defer();
@@ -18,8 +18,8 @@ angular.module('starter.services', [])
     },
     get: function(campsiteId) {
       return campsites.then(function(data) {
-        // Simple index lookup
-        return data[campsiteId]
+        // Search through array for the correct entry
+        return $filter('filter')(data, {id: parseInt(campsiteId)}, true)[0];
       });
     }
   }
