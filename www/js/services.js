@@ -11,9 +11,12 @@ angular.module('starter.services', [])
     var campsites = data["campsites"];
     // Latitude and longitude is stored differently in data.json
     campsites.forEach(function(campsite){
-      campsite.position = {lat: campsite.latitude, lng: campsite.longitude};
-      campsite.latitude = null;
-      campsite.longitude = null;
+      if (campsite.latitude != null && campsite.longitude != null) {
+        // For some reason some of the coordinates are stored as strings but not all
+        campsite.position = {lat: parseFloat(campsite.latitude), lng: parseFloat(campsite.longitude)};
+        campsite.latitude = null;
+        campsite.longitude = null;
+      };
     });
     deferred.resolve(campsites);
   });

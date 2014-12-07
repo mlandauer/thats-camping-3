@@ -28,7 +28,7 @@ angular.module('starter.controllers', [])
 
 .filter('distanceInMetres', function() {
   return function(position1, position2) {
-    if (position2 == null)
+    if (position1 == null || position2 == null)
       return null;
 
     var R = 6371000;
@@ -61,7 +61,7 @@ angular.module('starter.controllers', [])
 
 .filter('bearingInDegrees', function() {
   return function(position1, position2) {
-    if (position2 == null)
+    if (position1 == null || position2 == null)
       return null;
 
     var lon2 = position2.lng.toRad();
