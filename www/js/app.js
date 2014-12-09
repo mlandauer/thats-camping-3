@@ -21,6 +21,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 })
 
+// Allow urls starting with geo
+.config( ['$compileProvider', function( $compileProvider ) {
+  $compileProvider.aHrefSanitizationWhitelist(/^\s*(file|https?|ftp|mailto|geo):/);
+  // Angular before v1.2 uses $compileProvider.urlSanitizationWhitelist(...)
+}])
+
 .config(function($stateProvider, $urlRouterProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states

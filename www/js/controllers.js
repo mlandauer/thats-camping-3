@@ -103,6 +103,10 @@ angular.module('starter.controllers', [])
     var have = [];
     var notHave = [];
 
+    if (campsite == null) {
+      return {have: [], notHave: []};
+    }
+
     var caravans = campsite.caravans;
     var trailers = campsite.trailers;
     var car = campsite.car;
@@ -228,12 +232,6 @@ angular.module('starter.controllers', [])
     else {
       return list.slice(0, -1).join(", ") + " and " + list[list.length - 1];
     }
-  };
-})
-
-.filter('mapUrl', function() {
-  return function(campsite) {
-    return "geo:0,0?q=" + campsite.position.lat + "," + campsite.position.lng + "(" + campsite.shortName + ")";
   };
 })
 

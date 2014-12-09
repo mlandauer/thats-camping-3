@@ -31,10 +31,6 @@
         {{campsite | notHaveAccessFields | listAsText}}
       </div>
     </div>
+    <a class="button" ng-href="geo:0,0?q={{campsite.position.lat}},{{campsite.position.lng}}({{campsite.shortName}})" ng-show="campsite.position">Directions to Campsite</a>
   </ion-content>
-  <div class="bar bar-footer bar-subfooter" ng-show="campsite.position">
-    <div class="title">
-      <a class="button" ng-href={{ campsite | mapUrl }}>Directions to Campsite</a>
-    </div>
-  </div>
 </ion-view>
