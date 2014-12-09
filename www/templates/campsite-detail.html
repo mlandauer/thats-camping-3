@@ -11,22 +11,22 @@
     <p>{{campsite.description}}</p>
     <h2>Facilities</h2>
     <div class="list list-inset">
-      <div class="item" ng-show="campsite | haveFacilitiesFields | listAsText">
+      <div class="item item-text-wrap" ng-show="campsite | haveFacilitiesFields | listAsText">
         <strong>Has</strong>
         {{campsite | haveFacilitiesFields | listAsText}}
       </div>
-      <div class="item" ng-show="campsite | notHaveFacilitiesFields | listAsText">
+      <div class="item item-text-wrap" ng-show="campsite | notHaveFacilitiesFields | listAsText">
         <strong>But no</strong>
         {{campsite | notHaveFacilitiesFields | listAsText}}
       </div>
     </div>
     <h2>Access</h2>
     <div class="list list-inset">
-      <div class="item" ng-show="campsite | haveAccessFields | listAsText">
+      <div class="item item-text-wrap" ng-show="campsite | haveAccessFields | listAsText">
         <strong>For</strong>
         {{campsite | haveAccessFields | listAsText}}
       </div>
-      <div class="item" ng-show="campsite | notHaveAccessFields | listAsText">
+      <div class="item item-text-wrap" ng-show="campsite | notHaveAccessFields | listAsText">
         <strong>But not for</strong>
         {{campsite | notHaveAccessFields | listAsText}}
       </div>
