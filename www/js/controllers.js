@@ -231,6 +231,12 @@ angular.module('starter.controllers', [])
   };
 })
 
+.filter('mapUrl', function() {
+  return function(campsite) {
+    return "geo:0,0?q=" + campsite.position.lat + "," + campsite.position.lng + "(" + campsite.shortName + ")";
+  };
+})
+
 .controller('CampsiteDetailCtrl', function($scope, $stateParams, Campsites) {
   Campsites.get($stateParams.campsiteId).then(function(data) {
     $scope.campsite = data;
