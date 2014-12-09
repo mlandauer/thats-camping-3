@@ -98,6 +98,95 @@ angular.module('starter.controllers', [])
   };
 })
 
+.filter('facilitiesFields', function() {
+  return function(campsite) {
+    var have = [];
+    var notHave = [];
+
+    if (campsite == null)
+      return {have: [], notHave: []};
+
+    var toilets = campsite.toilets;
+    var picnicTables = campsite.picnicTables;
+    var barbecues = campsite.barbecues;
+    var showers = campsite.showers;
+    var drinkingWater = campsite.drinkingWater;
+
+    if (toilets == "flush") {
+      have.push("flush toilets");
+    }
+    else if (toilets == "non_flush") {
+      have.push("non-flush toilets");
+    }
+    else if (toilets == "none") {
+      notHave.push("toilets");
+    }
+
+    if (picnicTables) {
+      have.push("picnic tables");
+    }
+    else {
+      notHave.push("picnic tables");
+    }
+
+    // TODO: show whether you need to bring your own firewood elsewhere
+    // Like "You will need to bring firewood (if you want to use the wood BBQs) and drinking water"
+    if(barbecues == "wood" || barbecues == "wood_supplied" || barbecues == "wood_bring_your_own") {
+      have.push("wood BBQs");
+    }
+    else if (barbecues == "gas_electric") {
+      have.push("gas/electric BBQs");
+    }
+    else if (barbecues == "none") {
+      notHave.push("BBQs");
+    }
+
+    if (showers == "hot") {
+      have.push("hot showers");
+    }
+    else if (showers == "cold") {
+      have.push("cold showers");
+    }
+    else if (showers == "none") {
+      notHave.push("showers");
+    }
+
+    if (drinkingWater) {
+      have.push("drinking water");
+    }
+    else {
+      notHave.push("drinking water");
+    }
+    return {have: have, notHave: notHave};
+  };
+})
+
+.filter('haveFacilitiesFields', function($filter) {
+  return function(campsite) {
+    return $filter('facilitiesFields')(campsite)["have"];
+  }
+})
+
+.filter('notHaveFacilitiesFields', function($filter) {
+  return function(campsite) {
+    return $filter('facilitiesFields')(campsite)["notHave"];
+  }
+})
+
+.filter('listAsText', function() {
+  return function(list) {
+    if (list.length == 0) {
+      return null;
+    }
+    else if (list.length == 1) {
+      return list[0];
+    }
+    else {
+      return list.slice(0, -1).join(", ") + " and " + list[list.length - 1];
+    }
+  };
+})
+
 .controller('CampsiteDetailCtrl', function($scope, $stateParams, Campsites) {
   Campsites.get($stateParams.campsiteId).then(function(data) {
     $scope.campsite = data;

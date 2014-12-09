@@ -9,5 +9,10 @@
     <h1>{{campsite.longName}}</h1>
     <!-- TODO Split into separate paragraphs -->
     <p>{{campsite.description}}</p>
+    <h2>Facilities</h2>
+    <h3>Has</h3>
+    {{campsite | haveFacilitiesFields | listAsText}}
+    <h3>But no</h3>
+    {{campsite | notHaveFacilitiesFields | listAsText}}
   </ion-content>
 </ion-view>
