@@ -10,9 +10,22 @@
     <!-- TODO Split into separate paragraphs -->
     <p>{{campsite.description}}</p>
     <h2>Facilities</h2>
-    <h3>Has</h3>
-    {{campsite | haveFacilitiesFields | listAsText}}
-    <h3>But no</h3>
-    {{campsite | notHaveFacilitiesFields | listAsText}}
+    <div ng-show="campsite | haveFacilitiesFields | listAsText">
+      <h3>Has</h3>
+      {{campsite | haveFacilitiesFields | listAsText}}
+    </div>
+    <div ng-show="campsite | notHaveFacilitiesFields | listAsText">
+      <h3>But no</h3>
+      {{campsite | notHaveFacilitiesFields | listAsText}}
+    </div>
+    <h2>Access</h2>
+    <div ng-show="campsite | haveAccessFields | listAsText">
+      <h3>For</h3>
+      {{campsite | haveAccessFields | listAsText}}
+    </div>
+    <div ng-show="campsite | notHaveAccessFields | listAsText">
+      <h3>But not for</h3>
+      {{campsite | notHaveAccessFields | listAsText}}
+    </div>
   </ion-content>
 </ion-view>

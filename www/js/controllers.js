@@ -98,6 +98,38 @@ angular.module('starter.controllers', [])
   };
 })
 
+.filter('accessFields', function() {
+  return function(campsite) {
+    var have = [];
+    var notHave = [];
+
+    var caravans = campsite.caravans;
+    var trailers = campsite.trailers;
+    var car = campsite.car;
+
+    if (caravans) {
+      have.push("caravans");
+    }
+    else {
+      notHave.push("caravans");
+    }
+    if (trailers) {
+      have.push("trailers");
+    }
+    else {
+      notHave.push("trailers");
+    }
+    if (car) {
+      have.push("car camping");
+    }
+    else {
+      notHave.push("car camping");
+    }
+
+    return {have: have, notHave: notHave};
+  };
+})
+
 .filter('facilitiesFields', function() {
   return function(campsite) {
     var have = [];
@@ -170,6 +202,18 @@ angular.module('starter.controllers', [])
 .filter('notHaveFacilitiesFields', function($filter) {
   return function(campsite) {
     return $filter('facilitiesFields')(campsite)["notHave"];
+  }
+})
+
+.filter('haveAccessFields', function($filter) {
+  return function(campsite) {
+    return $filter('accessFields')(campsite)["have"];
+  }
+})
+
+.filter('notHaveAccessFields', function($filter) {
+  return function(campsite) {
+    return $filter('accessFields')(campsite)["notHave"];
   }
 })
 
