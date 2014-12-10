@@ -9,9 +9,6 @@ Number.prototype.toDeg = function() {
 
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {
-})
-
 .controller('CampsitesCtrl', function($scope, Campsites, geolocation) {
   Campsites.all().then(function(data) {
     $scope.campsites = data;
