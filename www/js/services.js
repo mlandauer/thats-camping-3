@@ -33,7 +33,7 @@ angular.module('starter.services', [])
   }
 }])
 
-.factory('Parks', function($q, $http) {
+.factory('Parks', function($q, $http, $filter) {
   var parks = $http.get('data.json').then(function(result) {
     return result.data["parks"];
   });
@@ -41,6 +41,12 @@ angular.module('starter.services', [])
   return {
     all: function() {
       return parks;
+    },
+    get: function(parkId) {
+      return parks.then(function(data) {
+        // Search through array for the correct entry
+        return $filter('filter')(data, {id: parseInt(parkId)}, true)[0];
+      });
     }
   }
 })

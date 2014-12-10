@@ -245,4 +245,10 @@ angular.module('starter.controllers', [])
   Parks.all().then(function(data) {
     $scope.parks = data;
   })
+})
+
+.controller('ParkDetailCtrl', function($scope, $stateParams, Parks) {
+  Parks.get($stateParams.parkId).then(function(data) {
+    $scope.park = data;
+  });
 });
