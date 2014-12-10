@@ -6,9 +6,8 @@ angular.module('starter.services', [])
 .factory('Campsites', ['$http', '$q', '$filter', function($http, $q, $filter) {
   // Might use a resource here that returns a JSON array
 
-  var deferred = $q.defer();
-  $http.get('data.json').success(function(data, status, headers, config) {
-    var campsites = data["campsites"];
+  var campsites = $http.get('data.json').then(function(result) {
+    var campsites = result.data["campsites"];
     // Latitude and longitude is stored differently in data.json
     campsites.forEach(function(campsite){
       if (campsite.latitude != null && campsite.longitude != null) {
@@ -18,9 +17,8 @@ angular.module('starter.services', [])
         campsite.longitude = null;
       };
     });
-    deferred.resolve(campsites);
+    return campsites;
   });
-  var campsites = deferred.promise;
 
   return {
     all: function() {
@@ -36,12 +34,9 @@ angular.module('starter.services', [])
 }])
 
 .factory('Parks', function($q, $http) {
-  var deferred = $q.defer();
-  $http.get('data.json').success(function(data, status, headers, config) {
-    var parks = data["parks"];
-    deferred.resolve(parks);
+  var parks = $http.get('data.json').then(function(result) {
+    return result.data["parks"];
   });
-  var parks = deferred.promise;
 
   return {
     all: function() {
