@@ -35,6 +35,21 @@ angular.module('starter.services', [])
   }
 }])
 
+.factory('Parks', function($q, $http) {
+  var deferred = $q.defer();
+  $http.get('data.json').success(function(data, status, headers, config) {
+    var parks = data["parks"];
+    deferred.resolve(parks);
+  });
+  var parks = deferred.promise;
+
+  return {
+    all: function() {
+      return parks;
+    }
+  }
+})
+
 .factory('geolocation', ['$q', function($q) {
   var cachedPosition = null;
 

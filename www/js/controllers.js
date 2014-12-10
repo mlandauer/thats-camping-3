@@ -241,5 +241,8 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('AccountCtrl', function($scope) {
+.controller('ParksCtrl', function($scope, Parks) {
+  Parks.all().then(function(data) {
+    $scope.parks = data;
+  })
 });
