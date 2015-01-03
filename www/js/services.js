@@ -29,6 +29,11 @@ angular.module('starter.services', [])
         // Search through array for the correct entry
         return $filter('filter')(data, {id: parseInt(campsiteId)}, true)[0];
       });
+    },
+    inPark: function(parkId) {
+      return campsites.then(function(data) {
+        return $filter('filter')(data, {park: parseInt(parkId)}, true);
+      });
     }
   }
 }])

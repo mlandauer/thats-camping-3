@@ -3,5 +3,11 @@
     <h1>{{park.longName}}</h1>
     <!-- TODO Split into separate paragraphs -->
     <p>{{park.description}}</p>
+
+    <ion-list>
+      <ion-item ng-repeat="campsite in campsites" type="item-text-wrap" href="#/tab/campsite/{{campsite.id}}">
+        {{campsite.shortName}}
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>

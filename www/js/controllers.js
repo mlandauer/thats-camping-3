@@ -242,8 +242,12 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('ParkDetailCtrl', function($scope, $stateParams, Parks) {
+.controller('ParkDetailCtrl', function($scope, $stateParams, Parks, Campsites) {
   Parks.get($stateParams.parkId).then(function(data) {
     $scope.park = data;
+  });
+  Campsites.inPark($stateParams.parkId).then(function(data) {
+    $scope.campsites = data;
+    console.log("campistes", data);
   });
 });
