@@ -1,8 +1,7 @@
 <ion-view title="{{parks.shortName}}">
   <ion-content has-header="true" padding="true">
     <h1>{{park.longName}}</h1>
-    <!-- TODO Split into separate paragraphs -->
-    <p>{{park.description}}</p>
+    <div ng-bind-html="park.description | formatParagraphs"></div>
 
     <h2>Campsites</h2>
     <ion-list>

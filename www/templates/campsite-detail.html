@@ -8,8 +8,7 @@
   <ion-content has-header="true" padding="true">
     <h1>{{campsite.longName}}</h1>
     <h3><a ng-href="#/tab/park/{{campsite.park.id}}">{{campsite.park.longName}}</a></h3>
-    <!-- TODO Split into separate paragraphs -->
-    <p>{{campsite.description}}</p>
+    <div ng-bind-html="campsite.description | formatParagraphs"></div>
     <h2>Facilities</h2>
     <div class="list list-inset">
       <div class="item item-text-wrap" ng-show="campsite | haveFacilitiesFields | listAsText">

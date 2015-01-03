@@ -65,6 +65,17 @@ angular.module('starter.controllers', [])
   };
 })
 
+.filter('formatParagraphs', function(){
+  return function(text) {
+    if (text == null) {
+      return "";
+    }
+    else {
+      return "<p>" + text.replace("\n\n", "</p><p>") + "</p>";      
+    }
+  };
+})
+
 .filter('bearingInDegrees', function() {
   return function(position1, position2) {
     if (position1 == null || position2 == null)
