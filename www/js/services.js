@@ -22,9 +22,14 @@ angular.module('starter.services', [])
     result.data["parks"].forEach(function(park) {
       parks[park.id] = park;
     });
+    // Add campsites arrays to parks
+    parks.forEach(function(park){
+      park.campsites = [];
+    });
     // Add park objects to campsites
     campsites.forEach(function(campsite){
       campsite.park = parks[campsite.park];
+      campsite.park.campsites.push(campsite);
     });
     return {
       campsites: campsites,
@@ -41,11 +46,6 @@ angular.module('starter.services', [])
     get: function(campsiteId) {
       return data.then(function(data) {
         return data.campsites[parseInt(campsiteId)];
-      });
-    },
-    inPark: function(parkId) {
-      return data.then(function(data) {
-        return $filter('filter')(data.campsites, {park: parseInt(parkId)}, true);
       });
     },
     getPark: function(parkId) {

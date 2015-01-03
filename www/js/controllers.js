@@ -242,7 +242,4 @@ angular.module('starter.controllers', [])
   Campsites.getPark($stateParams.parkId).then(function(data) {
     $scope.park = data;
   });
-  Campsites.inPark($stateParams.parkId).then(function(data) {
-    $scope.campsites = data;
-  });
 });

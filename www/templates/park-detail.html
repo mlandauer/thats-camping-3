@@ -5,7 +5,7 @@
     <p>{{park.description}}</p>
 
     <ion-list>
-      <ion-item ng-repeat="campsite in campsites" type="item-text-wrap" href="#/tab/campsite/{{campsite.id}}">
+      <ion-item ng-repeat="campsite in park.campsites" type="item-text-wrap" href="#/tab/campsite/{{campsite.id}}">
         {{campsite.shortName}}
       </ion-item>
     </ion-list>
