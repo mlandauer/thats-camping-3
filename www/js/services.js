@@ -38,12 +38,12 @@ angular.module('starter.services', [])
   });
 
   return {
-    all: function() {
+    allCampsites: function() {
       return data.then(function(data) {
         return data.campsites;
       });
     },
-    get: function(campsiteId) {
+    getCampsite: function(campsiteId) {
       return data.then(function(data) {
         return data.campsites[parseInt(campsiteId)];
       });

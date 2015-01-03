@@ -10,7 +10,7 @@ Number.prototype.toDeg = function() {
 angular.module('starter.controllers', [])
 
 .controller('CampsitesCtrl', function($scope, Campsites, geolocation) {
-  Campsites.all().then(function(data) {
+  Campsites.allCampsites().then(function(data) {
     $scope.campsites = data;
   })
   $scope.position = geolocation.getPosition();
@@ -233,7 +233,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('CampsiteDetailCtrl', function($scope, $stateParams, Campsites) {
-  Campsites.get($stateParams.campsiteId).then(function(data) {
+  Campsites.getCampsite($stateParams.campsiteId).then(function(data) {
     $scope.campsite = data;
   });
 })
