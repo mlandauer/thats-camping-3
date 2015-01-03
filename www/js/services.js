@@ -6,7 +6,7 @@ angular.module('starter.services', [])
 .factory('Campsites', ['$http', '$q', '$filter', function($http, $q, $filter) {
   // Might use a resource here that returns a JSON array
 
-  var campsites = $http.get('data.json').then(function(result) {
+  var data = $http.get('data.json').then(function(result) {
     var campsites = [];
     // Latitude and longitude is stored differently in data.json
     result.data["campsites"].forEach(function(campsite){
@@ -18,34 +18,35 @@ angular.module('starter.services', [])
       };
       campsites[campsite.id] = campsite;
     });
-    return campsites;
-  });
-
-  var parks = $http.get('data.json').then(function(result) {
     var parks = [];
     result.data["parks"].forEach(function(park) {
       parks[park.id] = park;
     });
-    return parks;
+    return {
+      campsites: campsites,
+      parks: parks
+    };
   });
 
   return {
     all: function() {
-      return campsites;
+      return data.then(function(data) {
+        return data.campsites;
+      });
     },
     get: function(campsiteId) {
-      return campsites.then(function(data) {
-        return data[parseInt(campsiteId)];
+      return data.then(function(data) {
+        return data.campsites[parseInt(campsiteId)];
       });
     },
     inPark: function(parkId) {
-      return campsites.then(function(data) {
-        return $filter('filter')(data, {park: parseInt(parkId)}, true);
+      return data.then(function(data) {
+        return $filter('filter')(data.campsites, {park: parseInt(parkId)}, true);
       });
     },
     getPark: function(parkId) {
-      return parks.then(function(data) {
-        return data[parseInt(parkId)];
+      return data.then(function(data) {
+        return data.parks[parseInt(parkId)];
       });
     }
   }
