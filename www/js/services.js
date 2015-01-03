@@ -7,18 +7,20 @@ angular.module('starter.services', [])
   // Might use a resource here that returns a JSON array
 
   var campsites = $http.get('data.json').then(function(result) {
-    var campsites = result.data["campsites"];
+    var campsites = [];
     // Latitude and longitude is stored differently in data.json
-    campsites.forEach(function(campsite){
+    result.data["campsites"].forEach(function(campsite){
       if (campsite.latitude != null && campsite.longitude != null) {
         // For some reason some of the coordinates are stored as strings but not all
         campsite.position = {lat: parseFloat(campsite.latitude), lng: parseFloat(campsite.longitude)};
         campsite.latitude = null;
         campsite.longitude = null;
       };
+      campsites[campsite.id] = campsite;
     });
     return campsites;
   });
+
 
   return {
     all: function() {
@@ -26,8 +28,7 @@ angular.module('starter.services', [])
     },
     get: function(campsiteId) {
       return campsites.then(function(data) {
-        // Search through array for the correct entry
-        return $filter('filter')(data, {id: parseInt(campsiteId)}, true)[0];
+        return data[parseInt(campsiteId)];
       });
     },
     inPark: function(parkId) {
