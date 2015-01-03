@@ -21,6 +21,9 @@ angular.module('starter.services', [])
     return campsites;
   });
 
+  var parks = $http.get('data.json').then(function(result) {
+    return result.data["parks"];
+  });
 
   return {
     all: function() {
@@ -35,24 +38,15 @@ angular.module('starter.services', [])
       return campsites.then(function(data) {
         return $filter('filter')(data, {park: parseInt(parkId)}, true);
       });
-    }
-  }
-}])
-
-.factory('Parks', function($q, $http, $filter) {
-  var parks = $http.get('data.json').then(function(result) {
-    return result.data["parks"];
-  });
-
-  return {
-    get: function(parkId) {
+    },
+    getPark: function(parkId) {
       return parks.then(function(data) {
         // Search through array for the correct entry
         return $filter('filter')(data, {id: parseInt(parkId)}, true)[0];
       });
     }
   }
-})
+}])
 
 .factory('geolocation', ['$q', function($q) {
   var cachedPosition = null;

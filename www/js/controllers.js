@@ -232,18 +232,18 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('CampsiteDetailCtrl', function($scope, $stateParams, Campsites, Parks) {
+.controller('CampsiteDetailCtrl', function($scope, $stateParams, Campsites) {
   Campsites.get($stateParams.campsiteId).then(function(data) {
     $scope.campsite = data;
     // TODO Hmm... would be nicer if this was done in the service
-    Parks.get(data.park).then(function(data2) {
+    Campsites.getPark(data.park).then(function(data2) {
       $scope.park = data2;
     });
   });
 })
 
-.controller('ParkDetailCtrl', function($scope, $stateParams, Parks, Campsites) {
-  Parks.get($stateParams.parkId).then(function(data) {
+.controller('ParkDetailCtrl', function($scope, $stateParams, Campsites) {
+  Campsites.getPark($stateParams.parkId).then(function(data) {
     $scope.park = data;
   });
   Campsites.inPark($stateParams.parkId).then(function(data) {
