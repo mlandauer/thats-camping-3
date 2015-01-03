@@ -6,11 +6,12 @@
   <ion-content>
     <ion-list>
       <ion-item ng-repeat="campsite in campsites | orderByDistanceTo:position" type="item-text-wrap" href="#/tab/campsite/{{campsite.id}}">
-        {{campsite.shortName}}
         <span class="item-note">
           {{campsite.position | distanceInMetres:position | distanceText}}
           {{campsite.position | bearingInDegrees:position | bearingText}}
         </span>
+        <h2>{{campsite.shortName}}</h2>
+        <p>{{campsite.park.shortName}}</p>
       </ion-item>
     </ion-list>
   </ion-content>
