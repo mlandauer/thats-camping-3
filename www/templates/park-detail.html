@@ -4,6 +4,7 @@
     <!-- TODO Split into separate paragraphs -->
     <p>{{park.description}}</p>
 
+    <h2>Campsites</h2>
     <ion-list>
       <ion-item ng-repeat="campsite in park.campsites" type="item-text-wrap" href="#/tab/campsite/{{campsite.id}}">
         {{campsite.shortName}}
