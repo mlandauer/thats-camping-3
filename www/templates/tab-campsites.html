@@ -5,13 +5,13 @@
   </ion-nav-buttons>
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="campsite in campsites | orderByDistanceTo:position" type="item-text-wrap" href="#/tab/campsite/{{campsite.id}}">
+      <ion-item collection-repeat="item in campsites | orderByDistanceTo:position" collection-item-width="'100%'" collection-item-height="76" type="item-text-wrap" href="#/tab/campsite/{{item.id}}" class="my-item">
         <span class="item-note">
-          {{campsite.position | distanceInMetres:position | distanceText}}
-          {{campsite.position | bearingInDegrees:position | bearingText}}
+          {{item.position | distanceInMetres:position | distanceText}}
+          {{item.position | bearingInDegrees:position | bearingText}}
         </span>
-        <h2>{{campsite.shortName}}</h2>
-        <p>{{campsite.park.shortName}}</p>
+        <h2>{{item.shortName}}</h2>
+        <p>{{item.park.shortName}}</p>
       </ion-item>
     </ion-list>
   </ion-content>
