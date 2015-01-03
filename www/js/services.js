@@ -44,9 +44,6 @@ angular.module('starter.services', [])
   });
 
   return {
-    all: function() {
-      return parks;
-    },
     get: function(parkId) {
       return parks.then(function(data) {
         // Search through array for the correct entry
