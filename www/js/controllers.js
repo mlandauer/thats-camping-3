@@ -235,10 +235,6 @@ angular.module('starter.controllers', [])
 .controller('CampsiteDetailCtrl', function($scope, $stateParams, Campsites) {
   Campsites.get($stateParams.campsiteId).then(function(data) {
     $scope.campsite = data;
-    // TODO Hmm... would be nicer if this was done in the service
-    Campsites.getPark(data.park).then(function(data2) {
-      $scope.park = data2;
-    });
   });
 })
 
@@ -248,6 +244,5 @@ angular.module('starter.controllers', [])
   });
   Campsites.inPark($stateParams.parkId).then(function(data) {
     $scope.campsites = data;
-    console.log("campistes", data);
   });
 });

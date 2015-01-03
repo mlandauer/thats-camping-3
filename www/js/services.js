@@ -22,6 +22,10 @@ angular.module('starter.services', [])
     result.data["parks"].forEach(function(park) {
       parks[park.id] = park;
     });
+    // Add park objects to campsites
+    campsites.forEach(function(campsite){
+      campsite.park = parks[campsite.park];
+    });
     return {
       campsites: campsites,
       parks: parks
