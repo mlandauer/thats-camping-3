@@ -22,7 +22,11 @@ angular.module('starter.services', [])
   });
 
   var parks = $http.get('data.json').then(function(result) {
-    return result.data["parks"];
+    var parks = [];
+    result.data["parks"].forEach(function(park) {
+      parks[park.id] = park;
+    });
+    return parks;
   });
 
   return {
@@ -41,8 +45,7 @@ angular.module('starter.services', [])
     },
     getPark: function(parkId) {
       return parks.then(function(data) {
-        // Search through array for the correct entry
-        return $filter('filter')(data, {id: parseInt(parkId)}, true)[0];
+        return data[parseInt(parkId)];
       });
     }
   }
